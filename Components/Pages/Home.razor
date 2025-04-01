@@ -1,0 +1,32 @@
+﻿@page "/"
+@using BlazorApp1.Shared.QuickGrids.Rows
+@using Microsoft.AspNetCore.Components.QuickGrid
+
+<style>
+    .hidden {
+        display: none;
+    }
+</style>
+
+<PageTitle>Home</PageTitle>
+
+<p>
+    Selected ID: @SelectedId
+</p>
+
+<div class="quickgrid-main">
+    <div class="grid">
+        <QuickGrid id="persons"
+                   Items="@Query" Class="table table-striped table-hover table-bordered has-row-click">
+
+            <TemplateColumn Class="hidden">
+                <div class="idselector">@context.Id</div>
+            </TemplateColumn>
+
+            <PropertyColumn Property="@(c => c.Name)" Sortable="true"/>
+        </QuickGrid>
+    </div>
+
+
+    <QuickGridRowClick IdFieldClass="idselector" OnRowClicked="HandleRowClickedAsync" TableHtmlID="persons"/>
+</div>
